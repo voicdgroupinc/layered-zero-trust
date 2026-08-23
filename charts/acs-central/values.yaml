@@ -124,7 +124,11 @@ scanner:
           memory: 500Mi
         limits:
           cpu: 500m
-          memory: 1Gi
+          # 2Gi, not the 1Gi default: the matcher OOMKills (exit 137) every
+          # cycle while importing bundles/rhel-vex.json.zst, the largest vuln
+          # bundle and the only one it fully materialises. At 1Gi it never
+          # finishes the import, so vulnerability matching never comes up.
+          memory: 2Gi
 
     # Database
     db:
