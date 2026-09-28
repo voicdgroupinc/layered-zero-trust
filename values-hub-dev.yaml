@@ -2,7 +2,7 @@
 # Same components, operators and channels as values-hub.yaml (prod), except:
 #   - clusterGroup name hub-dev (selected at install with --set main.clusterGroupName=hub-dev;
 #     values-global.yaml stays on hub for prod)
-#   - no qtodo demo app
+#   - no qtodo demo app (its namespace is kept for ztvp-certificates)
 #   - ACS Central PVCs cut from the chart's 100Gi defaults (see acs-central overrides)
 # Keep the rest in sync with values-hub.yaml.
 # Hub Configuration (Default)
@@ -60,6 +60,9 @@ clusterGroup:
   namespaces:
     open-cluster-management:
     vault:
+    # Namespace kept although the qtodo app is not deployed: ztvp-certificates (chart values and
+    # overrides/values-ztvp-certificates.yaml) distribute the CA bundle into it and fail without it.
+    qtodo:
     external-secrets-operator:
       operatorGroup: true
       targetNamespaces: []
