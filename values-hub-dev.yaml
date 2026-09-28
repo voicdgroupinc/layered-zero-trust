@@ -275,6 +275,10 @@ clusterGroup:
           value: openshift-config
         - name: customCA.secretRef.key
           value: ca.crt
+        # Dev: actually read openshift-config/custom-ca-bundle (the internal root CA, synced from
+        # Vault by voicd-cluster-config). values-hub.yaml sets the name but never enables it.
+        - name: customCA.secretRef.enabled
+          value: "true"
         
         # Automatic rollout configuration (simple overrides work fine)
         - name: rollout.enabled
