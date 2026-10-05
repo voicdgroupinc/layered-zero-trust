@@ -7,6 +7,10 @@ global:
     installPlanApproval: Automatic
 main:
   clusterGroupName: hub
+  gitops:
+    # Kanidm-synced cluster admins get role:admin in the operator-built Argo CD
+    # (vp-gitops); without it they are read-only and cannot sync.
+    additionalArgoAdmins: openshift-cluster-admins
   multiSourceConfig:
     enabled: true
     clusterGroupChartVersion: "0.9.*"
